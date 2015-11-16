@@ -1,0 +1,16 @@
+{
+    "authors": [
+        {
+            "name": "Yuri Salimovskiy",
+            "email": "deep@intoeetive.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "controllers",
+            "models",
+            "records",
+            "services"
+        ]
+    }
+}

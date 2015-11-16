@@ -1,0 +1,38 @@
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+        label: "Flarum URL"|t,
+        id: 'flarumUrl',
+        name: 'flarumUrl',
+        instructions: "Base URL of your Flarum installation"|t,
+        value: settings.flarumUrl,
+        errors: settings.getErrors('flarumUrl')
+    }) 
+}}
+
+{{ forms.textField({
+        label: "Flarum API login"|t,
+        id: 'flarumApiLogin',
+        name: 'flarumApiLogin',
+        value: settings.flarumApiLogin,
+        errors: settings.getErrors('flarumApiLogin')
+    }) 
+}}
+
+{{ forms.textField({
+        label: "Flarum API password"|t,
+        id: 'flarumApiPass',
+        name: 'flarumApiPass',
+        value: settings.flarumApiPass,
+        errors: settings.getErrors('flarumApiPass')
+    }) 
+}}
+
+{{ forms.textField({
+        label: "Flarum API Token"|t,
+        id: 'flarumApiToken',
+        name: 'flarumApiToken',
+        instructions: "Will be created automatically"|t,
+        value: settings.flarumApiToken,
+        readonly: true
+    }) 
+}}
