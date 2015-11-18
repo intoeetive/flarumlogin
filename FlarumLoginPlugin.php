@@ -77,9 +77,7 @@ class FlarumLoginPlugin extends BasePlugin
                 $old_userdata = $this->_getUserRecordById($CraftUserId);
                 $user_responce = craft()->flarumLogin->updateUser($old_userdata->username, $userdata);
             }
-            echo '<pre>';
-            var_dump($user_responce);
-            exit();
+
             /*
             $photo = $event->params['user']->photo;
 
