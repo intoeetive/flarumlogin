@@ -33,7 +33,7 @@ class FlarumLoginPlugin extends BasePlugin
     {
         craft()->on('userSession.onLogin', function(Event $event) { 
 
-            craft()->flarumLogin->getUser($event->params['username']);
+            craft()->flarumLogin->getUser($this->_cleanupUsername($event->params['username']));
             
         });
         
@@ -45,7 +45,7 @@ class FlarumLoginPlugin extends BasePlugin
         
         craft()->on('users.onDeleteUser', function(Event $event) { 
 
-            craft()->flarumLogin->deleteUser($event->params['user']->getAttribute('username'), $event->params['transferContentTo']->getAttribute('username'));
+            craft()->flarumLogin->deleteUser($this->_cleanupUsername($event->params['user']->getAttribute('username')), $event->params['transferContentTo']->getAttribute('username'));
 
         });
         
@@ -56,7 +56,7 @@ class FlarumLoginPlugin extends BasePlugin
             if ($event->params['isNewUser'])
             {
                 $userdata = array('data'=> array(
-                    'attributes.username' => $event->params['user']->getAttribute('username'),
+                    'attributes.username' => $this->_cleanupUsername($event->params['user']->getAttribute('username')),
                     'attributes.email' => $event->params['user']->getAttribute('email'),
                     'attributes.password' => craft()->flarumLogin->generatePassword(), 
                     'attributes.isActivated' => !$event->params['user']->getAttribute('pending')                      
@@ -65,7 +65,7 @@ class FlarumLoginPlugin extends BasePlugin
             }
             else
             {
-                $username = $event->params['user']->getAttribute('username');
+                $username = $this->_cleanupUsername($event->params['user']->getAttribute('username'));
                 $userdata = array('data'=> array(
                     'attributes' => array(
                         'username' => $username,
@@ -75,7 +75,7 @@ class FlarumLoginPlugin extends BasePlugin
                 ));
                 $CraftUserId = $event->params['user']->getAttribute('id');
                 $old_userdata = $this->_getUserRecordById($CraftUserId);
-                $user_responce = craft()->flarumLogin->updateUser($old_userdata->username, $userdata);
+                $user_responce = craft()->flarumLogin->updateUser($this->_cleanupUsername($old_userdata->username), $userdata);
             }
 
             /*
@@ -87,6 +87,13 @@ class FlarumLoginPlugin extends BasePlugin
             */
         });
         //
+    }
+    
+    private function _cleanupUsername($username)
+    {
+        $username = str_replace('@', '-', $username);
+        $username = str_replace('.', '-', $username);
+        return $username;
     }
     
     private function _getUserRecordById($userId)
