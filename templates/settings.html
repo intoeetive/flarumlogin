@@ -9,6 +9,16 @@
     }) 
 }}
 
+{{ forms.passwordField({
+        label: "Flarum Domain"|t,
+        id: 'flarumDomain',
+        name: 'flarumDomain',
+        instructions: "Domain name of your Flarum site"|t,
+        value: settings.flarumDomain,
+        errors: settings.getErrors('flarumDomain')
+    }) 
+}}
+
 {{ forms.textField({
         label: "Flarum API login"|t,
         id: 'flarumApiLogin',

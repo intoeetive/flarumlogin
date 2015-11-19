@@ -197,7 +197,7 @@ class FlarumLoginService extends BaseApplicationComponent
         
         if ($request!='')
         {
-            setcookie('flarum_remember',$request,time() + 14 * 24 * 60 * 60);
+            setcookie('flarum_remember',$request,time() + 14 * 24 * 60 * 60, '', $this->settings->flarumDomain);
         }
         else
         {
@@ -214,7 +214,7 @@ class FlarumLoginService extends BaseApplicationComponent
     public function logoutUser()
     {
             
-        setcookie('flarum_remember', '', 0);
+        setcookie('flarum_remember', '', 0, '', $this->settings->flarumDomain);
 
     }
     

@@ -109,6 +109,7 @@ class FlarumLoginPlugin extends BasePlugin
     protected function defineSettings()
     {
         return array(
+            'flarumDomain' => array(AttributeType::String, 'required'=>true),
             'flarumUrl' => array(AttributeType::String, 'required'=>true),
             'flarumApiLogin' => array(AttributeType::String, 'required'=>true),
             'flarumApiPass' => array(AttributeType::String, 'required'=>true),
